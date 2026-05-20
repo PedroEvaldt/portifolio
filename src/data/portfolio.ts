@@ -6,7 +6,7 @@ const unpublishedRepositoryNote =
 export const portfolio: PortfolioData = {
   site: {
     repositoryUrl: "https://github.com/PedroEvaldt/portifolio",
-    deploymentUrl: null,
+    deploymentUrl: "https://portifolio-omega-gules.vercel.app/",
     ogImagePath: null,
   },
   person: {
