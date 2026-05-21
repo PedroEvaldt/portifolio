@@ -23,7 +23,9 @@ export default function Home() {
         <About about={portfolio.about} />
         <Skills skills={portfolio.skills} />
         <Projects projects={portfolio.projects} />
-        <CaseStudy caseStudy={portfolio.featuredCaseStudy} />
+        {portfolio.caseStudies.map((cs) => (
+          <CaseStudy caseStudy={cs} key={cs.projectSlug} />
+        ))}
         <Education education={portfolio.education} />
         <Contact contact={portfolio.contact} />
       </main>

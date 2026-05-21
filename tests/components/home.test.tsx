@@ -31,26 +31,28 @@ describe("Home page layout", () => {
       ).toHaveAttribute("href", item.href);
     }
 
+    const heroSection = screen.getByRole("region", {
+      name: /software developer focused on backend/i,
+    });
+
     for (const cta of portfolio.hero.ctas) {
-      expect(screen.getAllByRole("link", { name: cta.label })[0]).toHaveAttribute(
-        "href",
-        cta.href
-      );
+      expect(
+        within(heroSection).getByRole("link", { name: cta.label })
+      ).toHaveAttribute("href", cta.href);
     }
   });
 
   it("renders the required page sections", () => {
     render(<Home />);
 
-    for (const heading of [
-      "About",
-      "Skills",
-      "Projects",
-      portfolio.featuredCaseStudy.title,
-      "Education",
-      "Contact",
-    ]) {
+    for (const heading of ["About", "Skills", "Projects", "Education", "Contact"]) {
       expect(screen.getByRole("heading", { name: heading })).toBeInTheDocument();
+    }
+
+    for (const cs of portfolio.caseStudies) {
+      expect(
+        screen.getByRole("heading", { name: cs.title })
+      ).toBeInTheDocument();
     }
   });
 

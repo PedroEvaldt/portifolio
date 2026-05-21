@@ -71,7 +71,7 @@ export function Hero({ hero }: HeroProps) {
             <span className="h-3 w-3 rounded-full bg-yellow-400" />
             <span className="h-3 w-3 rounded-full bg-accent-green" />
           </div>
-          <span className="text-xs text-slate-500">~/portfolio</span>
+          <span className="text-xs text-slate-400">~/portfolio</span>
         </div>
         <pre className="whitespace-pre-wrap p-5 leading-7">
           {hero.terminalLines.join("\n")}

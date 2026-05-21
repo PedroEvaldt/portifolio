@@ -6,13 +6,16 @@ type CaseStudyProps = {
 };
 
 export function CaseStudy({ caseStudy }: CaseStudyProps) {
+  const sectionId = `case-study-${caseStudy.projectSlug}`;
+  const titleId = `${sectionId}-title`;
+
   return (
     <section
-      aria-labelledby="case-study-title"
+      aria-labelledby={titleId}
       className="border-t border-surface-border py-16 lg:py-20"
-      id="case-study"
+      id={sectionId}
     >
-      <h2 id="case-study-title" className="text-2xl font-semibold text-slate-50">
+      <h2 id={titleId} className="text-2xl font-semibold text-slate-50">
         {caseStudy.title}
       </h2>
       <div className="mt-6 grid gap-4 md:grid-cols-2">

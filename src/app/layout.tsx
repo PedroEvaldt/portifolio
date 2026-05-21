@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import { portfolio } from "@/data/portfolio";
 import "./globals.css";
+
+const geistSans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
 const title = `${portfolio.person.name} | ${portfolio.person.role}`;
 const description =
@@ -60,14 +64,35 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: portfolio.person.name,
+  jobTitle: portfolio.person.role,
+  url: siteUrl,
+  sameAs: [
+    portfolio.contact.links.github.href,
+    portfolio.contact.links.linkedin.href,
+  ].filter(Boolean),
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html className="dark" lang="en">
-      <body className="min-h-screen bg-surface-base text-slate-100 antialiased">
+    <html
+      className={`dark ${geistSans.variable} ${geistMono.variable}`}
+      lang="en"
+    >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body className="min-h-screen text-slate-100 antialiased">
         {children}
       </body>
     </html>

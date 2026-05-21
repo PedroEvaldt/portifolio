@@ -97,7 +97,7 @@ export type PortfolioData = {
   about: AboutData;
   skills: SkillCategory[];
   projects: Project[];
-  featuredCaseStudy: CaseStudy;
+  caseStudies: CaseStudy[];
   education: EducationData;
   contact: ContactData;
 };

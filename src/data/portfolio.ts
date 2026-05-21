@@ -34,6 +34,12 @@ export const portfolio: PortfolioData = {
         variant: "secondary",
         isExternal: true,
       },
+      {
+        label: "Download CV",
+        href: "/cv-pedro-evaldt.pdf",
+        variant: "ghost",
+        isExternal: true,
+      },
       { label: "Contact", href: "#contact", variant: "ghost" },
     ],
     terminalLines: [
@@ -76,9 +82,9 @@ export const portfolio: PortfolioData = {
         "HTTP server and CLI in Go for storing and searching personal notes.",
       technologies: ["Go", "PostgreSQL", "sqlc", "goose", "Docker", "Cobra"],
       highlights: [
-        "Combines a backend API with a command-line workflow.",
-        "Uses database migrations and generated type-safe SQL access.",
-        "Designed around a local-first personal knowledge workflow.",
+        "Single Go binary exposes both an HTTP API and a CLI — one tool for programmatic and human access.",
+        "Persistence is fully explicit: goose handles schema migrations, sqlc generates type-safe query functions from SQL definitions.",
+        "Docker isolates the development database, making the environment reproducible with a single command.",
       ],
       links: {
         github: {
@@ -86,7 +92,7 @@ export const portfolio: PortfolioData = {
           href: "https://github.com/PedroEvaldt/recall",
           isAvailable: true,
         },
-        details: { label: "Details", href: "#case-study" },
+        details: { label: "Details", href: "#case-study-recall" },
       },
     },
     {
@@ -96,9 +102,9 @@ export const portfolio: PortfolioData = {
         "Personal finance tracking application focused on organizing expenses and financial records.",
       technologies: ["Python", "Finance", "Data modeling", "Automation"],
       highlights: [
-        "Organizes financial data around practical personal tracking workflows.",
-        "Keeps the project focused on clear records and maintainable data structures.",
-        "Provides a foundation for future reports, metrics and automation.",
+        "Models financial records around practical personal tracking workflows, not generic CRUD.",
+        "Data structures chosen to reflect real spending categories and time-based grouping.",
+        "Structured to add reports, filtering and CSV export without rearchitecting the core.",
       ],
       links: {
         github: {
@@ -116,9 +122,9 @@ export const portfolio: PortfolioData = {
         "Educational implementation of internal Git commands in Python, including objects, trees, commits and clone via Smart HTTP.",
       technologies: ["Python", "Git internals", "Smart HTTP", "CLI"],
       highlights: [
-        "Implements core Git object storage concepts for learning.",
-        "Builds trees and commits from low-level primitives.",
-        "Explores clone behavior through the Smart HTTP protocol.",
+        "SHA-1 hashing and zlib compression applied to each object following Git's exact binary format — no shortcuts.",
+        "Clone implemented over the Smart HTTP protocol, negotiating refs and pack-files against real remote repositories.",
+        "Built from the protocol spec rather than wrapping an existing Git library, covering tree serialization and commit graphs.",
       ],
       links: {
         github: {
@@ -126,7 +132,7 @@ export const portfolio: PortfolioData = {
           href: "https://github.com/PedroEvaldt/Git-Simulator",
           isAvailable: true,
         },
-        details: { label: "Details", href: "#projects" },
+        details: { label: "Details", href: "#case-study-git-simulator" },
       },
     },
     {
@@ -136,9 +142,9 @@ export const portfolio: PortfolioData = {
         "C++ application with PostgreSQL and Docker, using SOCI for persistence.",
       technologies: ["C++", "PostgreSQL", "Docker", "SOCI"],
       highlights: [
-        "Connects a C++ application to relational persistence.",
-        "Uses Docker to make the database environment reproducible.",
-        "Practices transaction-oriented application design.",
+        "Integrates a C++ application with PostgreSQL via SOCI, avoiding an ORM for direct SQL control.",
+        "Docker provides a reproducible database environment without requiring a local PostgreSQL installation.",
+        "Transaction-oriented design mirrors real banking operations at the application layer.",
       ],
       links: {
         github: {
@@ -158,9 +164,9 @@ export const portfolio: PortfolioData = {
         "Go IMAP client for fetching emails and generating an organized local file.",
       technologies: ["Go", "IMAP", "Automation", "Local files"],
       highlights: [
-        "Automates email retrieval through IMAP.",
-        "Transforms mailbox data into a local organized output.",
-        "Focuses on a practical workflow instead of a hosted backend.",
+        "Fetches messages directly from the IMAP server — no hosted intermediary or third-party service required.",
+        "Transforms raw mailbox data into a structured local file, turning retrieval into immediate organization.",
+        "Self-contained Go binary: the entire automation runs as a single command with no runtime dependencies.",
       ],
       links: {
         github: {
@@ -174,49 +180,94 @@ export const portfolio: PortfolioData = {
       },
     },
   ],
-  featuredCaseStudy: {
-    projectSlug: "recall",
-    title: "Featured case study: Recall",
-    sections: [
-      {
-        title: "Problem",
-        items: [
-          "Personal notes are easy to create but hard to retrieve when they live across disconnected files and tools.",
-        ],
-      },
-      {
-        title: "Technical decisions",
-        items: [
-          "Use Go for a small, fast HTTP server and CLI.",
-          "Use PostgreSQL with sqlc and goose to keep persistence explicit and maintainable.",
-          "Use Docker to make the development database reproducible.",
-        ],
-      },
-      {
-        title: "Implementation highlights",
-        items: [
-          "CLI commands map to practical note workflows.",
-          "Database migrations define the storage model clearly.",
-          "Generated SQL code keeps database access type-safe.",
-        ],
-      },
-      {
-        title: "Challenges",
-        items: [
-          "Balancing a simple CLI experience with a backend that can evolve.",
-          "Keeping the schema useful without over-designing the first version.",
-        ],
-      },
-      {
-        title: "Next steps",
-        items: [
-          "Improve search ranking and filtering.",
-          "Add better import and export workflows.",
-          "Expand tests around API and CLI behavior.",
-        ],
-      },
-    ],
-  },
+  caseStudies: [
+    {
+      projectSlug: "recall",
+      title: "Case study: Recall",
+      sections: [
+        {
+          title: "Problem",
+          items: [
+            "Personal notes are easy to create but hard to retrieve when they live across disconnected files and tools.",
+          ],
+        },
+        {
+          title: "Technical decisions",
+          items: [
+            "Use Go for a small, fast HTTP server and CLI — both in one binary.",
+            "Use PostgreSQL with sqlc and goose to keep persistence explicit and maintainable.",
+            "Use Docker to make the development database reproducible.",
+          ],
+        },
+        {
+          title: "Implementation highlights",
+          items: [
+            "CLI commands map directly to practical note workflows.",
+            "Database migrations define the storage model clearly and incrementally.",
+            "Generated SQL code keeps database access type-safe without a heavy ORM.",
+          ],
+        },
+        {
+          title: "Challenges",
+          items: [
+            "Balancing a simple CLI experience with a backend that can evolve independently.",
+            "Keeping the schema useful without over-designing the first version.",
+          ],
+        },
+        {
+          title: "Next steps",
+          items: [
+            "Improve search ranking and filtering.",
+            "Add better import and export workflows.",
+            "Expand tests around API and CLI behavior.",
+          ],
+        },
+      ],
+    },
+    {
+      projectSlug: "git-simulator",
+      title: "Case study: Git Simulator",
+      sections: [
+        {
+          title: "Problem",
+          items: [
+            "Git internals — object storage, tree serialization, commit history and the clone protocol — are typically invisible when using the tool. Understanding them requires reading the source or reimplementing them.",
+          ],
+        },
+        {
+          title: "Technical decisions",
+          items: [
+            "Python for fast iteration and native support for binary operations and hashing.",
+            "No external Git library: everything built from the protocol spec, not wrapped around an existing implementation.",
+            "Target Smart HTTP for clone to cover real-world protocol negotiation, not just local object copy.",
+          ],
+        },
+        {
+          title: "Implementation highlights",
+          items: [
+            "SHA-1 hashing and zlib compression applied per object following Git's exact binary format.",
+            "Tree entries serialized with mode, name and raw SHA bytes as the spec requires.",
+            "Smart HTTP clone negotiated via /info/refs and /git-upload-pack against real remote repositories.",
+          ],
+        },
+        {
+          title: "Challenges",
+          items: [
+            "Git's binary wire format requires byte-exact serialization — small mistakes produce silently corrupt objects.",
+            "Pack-file handling required understanding delta encoding used to compress object streams.",
+          ],
+        },
+        {
+          title: "Next steps",
+          items: [
+            "Implement push support via Smart HTTP.",
+            "Add ref tracking and branch awareness.",
+            "Support delta-compressed pack-file reconstruction.",
+          ],
+        },
+      ],
+    },
+  ],
   education: {
     institution: "UFRGS",
     program: "Computer Science",

@@ -51,9 +51,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
           fallbackClassName={unavailableLinkClassName}
           link={project.links.github}
         />
-        <a className={linkClassName} href={project.links.details.href}>
-          {project.links.details.label}
-        </a>
+        {project.links.details.href !== "#projects" && (
+          <a className={linkClassName} href={project.links.details.href}>
+            {project.links.details.label}
+          </a>
+        )}
       </div>
     </article>
   );

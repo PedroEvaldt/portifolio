@@ -25,8 +25,14 @@ describe("Projects", () => {
 
     expect(screen.getAllByRole("link", { name: "GitHub" })).toHaveLength(3);
     expect(screen.getAllByText("Repository not public")).toHaveLength(2);
+
+    // Details links are only shown for projects that have a real destination
+    // (i.e. not pointing back to #projects itself)
+    const projectsWithDetails = portfolio.projects.filter(
+      (p) => p.links.details.href !== "#projects"
+    );
     expect(screen.getAllByRole("link", { name: "Details" })).toHaveLength(
-      portfolio.projects.length
+      projectsWithDetails.length
     );
   });
 });
